@@ -1,4 +1,4 @@
-Android-Donwload-Manager
+Android-Download-Manager
 ========================
 
 Android/Java download manager library help you to download files in parallel mechanism in some chunks.
