@@ -5,5 +5,5 @@ package com.golshadi.majid.Utils;
  */
 public interface QueueObserver {
 
-    public void wakeUp(int taskID);
+    void wakeUp(int taskID);
 }

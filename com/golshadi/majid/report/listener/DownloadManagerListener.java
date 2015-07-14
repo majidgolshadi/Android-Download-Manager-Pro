@@ -5,20 +5,20 @@ package com.golshadi.majid.report.listener;
  */
 public interface DownloadManagerListener {
 
-    public abstract void OnDownloadStarted(long taskId);
+    void OnDownloadStarted(long taskId);
 
-    public abstract void OnDownloadPaused(long taskId);
+    void OnDownloadPaused(long taskId);
 
-    public abstract void onDownloadProcess(long taskId, double percent, long downloadedLength);
+    void onDownloadProcess(long taskId, double percent, long downloadedLength);
 
-    public abstract void OnDownloadFinished(long taskId);
+    void OnDownloadFinished(long taskId);
 
-    public abstract void OnDownloadRebuildStart(long taskId);
+    void OnDownloadRebuildStart(long taskId);
 
-    public abstract void OnDownloadRebuildFinished(long taskId);
+    void OnDownloadRebuildFinished(long taskId);
 
-    public abstract void OnDownloadCompleted(long taskId);
+    void OnDownloadCompleted(long taskId);
     
-    public abstract void connectionLost(long taskId);
+    void connectionLost(long taskId);
 
 }
