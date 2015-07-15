@@ -1,6 +1,8 @@
 Android-Download-Manager
 ========================
 
+Android下载工具类，看到master只是工具类，最近正好在使用下载，就弄了个demo push上来，需要的pull下来可以直接使用工程，以后也尝试翻译
+
 Android/Java download manager library help you to download files in parallel mechanism in some chunks.
 
 Overview
