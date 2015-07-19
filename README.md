@@ -1,3 +1,5 @@
+[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--Download--Manager-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2131)
+
 Android-Download-Manager
 ========================
 
