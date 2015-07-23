@@ -1,5 +1,5 @@
 [![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-Android--Download--Manager-brightgreen.svg?style=flat)](http://android-arsenal.com/details/1/2131)
-[![The MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](http://opensource.org/licenses/MIT)
+[![The MIT License](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/majidgolshadi/Android-Download-Manager-Pro/blob/master/LICENSE)
 
 Android-Download-Manager
 ========================
