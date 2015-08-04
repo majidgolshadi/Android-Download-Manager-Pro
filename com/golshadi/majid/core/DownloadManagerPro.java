@@ -318,7 +318,7 @@ public class DownloadManagerPro {
 
 
     /**
-     * delete download task from db and it you set deleteTaskFile as true
+     * delete download task from db and if you set deleteTaskFile as true
      * it's go to saved folder and delete that file
      *
      * @param token
