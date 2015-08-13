@@ -56,7 +56,7 @@ in order to download with this lib you need to set its basic configurations and 
 void DownloadManagerPro.init(String saveFilePath, int maxChunk, DownloadManagerListener class)
 ```
 
-* String **saveFielPath**: folder address that you want to save your completed download task in it.
+* String **saveFilePath**: folder address that you want to save your completed download task in it.
 * int **maxChunk** : number of maximum chunks. any task is divided into some chunks and download them in parallel. it's better not to define more than 16 chunks; but if you do it's set to 16 automatically.
 * DownloadManagerListener **listenerClass** in this package an interface created to report developer download tasks status. this interface includes some abstract methods that will be introduced later.
 
