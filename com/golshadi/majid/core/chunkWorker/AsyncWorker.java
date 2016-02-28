@@ -44,8 +44,10 @@ public class AsyncWorker extends Thread{
         	
             URL url = new URL(task.url);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-            connection.setConnectTimeout(1000);
-            connection.setReadTimeout(1000);
+            
+            	// Avoid timeout exception which usually occurs in low network
+            connection.setConnectTimeout(0);
+            connection.setReadTimeout(0);
             if (chunk.end != 0) // support unresumable links
                 connection.setRequestProperty("Range", "bytes=" + chunk.begin + "-" + chunk.end);
             
@@ -53,7 +55,14 @@ public class AsyncWorker extends Thread{
             
 
             File cf = new File(FileUtils.address(task.save_address, String.valueOf(chunk.id)));
-            InputStream remoteFileIn = connection.getInputStream();
+            // Check response code first to avoid error stream
+            int status = connection.getResponseCode();
+           	InputStream remoteFileIn;
+              if(status == 416)
+                remoteFileIn = connection.getErrorStream();
+              else
+                remoteFileIn = connection.getInputStream();
+            
             FileOutputStream chunkFile = new FileOutputStream(cf, true);
             
             int len = 0;
