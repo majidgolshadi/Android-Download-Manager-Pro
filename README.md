@@ -134,10 +134,10 @@ dm.pauseDownload(taskToekn);
 
 StartQueueDownload method create a queue sort on what you want and start download queue tasks with downloadTaskPerTime number simultaneously. If download tasks are running in queue and you try to start it again it throws a QueueDownloadInProgressException exception.
 ```java
-void DownloadManagerPro.StartQueueDownload(int downloadTaskPerTime, int priority) throws QueueDownloadInProgressException
+void DownloadManagerPro.StartQueueDownload(int downloadTaskPerTime, int sortType) throws QueueDownloadInProgressException
 ```
-int downloadTaskPerTime: the number of task that can be downloaded simultaneously
-* int priority: Grant priority to more desired files to be downloaded.
+* int downloadTaskPerTime: the number of task that can be downloaded simultaneously
+* int sortType: Grant priority to more desired files to be downloaded.
 
  * QueueSort.HighPriority : only high priority
  * QueueSort.LowPriority : only low priority

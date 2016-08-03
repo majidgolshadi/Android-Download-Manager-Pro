@@ -92,11 +92,11 @@ public class TasksDataSource {
         return completedTasks;
     }
 
-    public List<Task> getUnCompletedTasks(int priority){
+    public List<Task> getUnCompletedTasks(int sortType){
         List<Task> unCompleted = new ArrayList<Task>();
         String query = "SELECT * FROM " + TABLES.TASKS
                 + " WHERE " + TASKS.COLUMN_STATE + "!=" + SqlString.Int(TaskStates.END);
-        switch (priority){
+        switch (sortType){
             case QueueSort.HighPriority:
                 query += " AND "+TASKS.COLUMN_PRIORITY+"="+SqlString.Int(1);
                 break;

@@ -168,11 +168,11 @@ public class DownloadManagerPro {
     /**
      * @param downloadTaskPerTime
      */
-    public void startQueueDownload(int downloadTaskPerTime, int priority)
+    public void startQueueDownload(int downloadTaskPerTime, int sortType)
             throws QueueDownloadInProgressException {
 
         Moderator localModerator = new Moderator(tasksDataSource, chunksDataSource);
-        List<Task> unCompletedTasks = tasksDataSource.getUnCompletedTasks(priority);
+        List<Task> unCompletedTasks = tasksDataSource.getUnCompletedTasks(sortType);
 
         if (qt == null) {
             qt = new QueueModerator(tasksDataSource, chunksDataSource,
