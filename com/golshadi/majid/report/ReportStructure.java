@@ -14,18 +14,18 @@ import java.util.List;
  */
 public class ReportStructure {
 
-    private int id;
-    private String name;
-    private int state;
-    private String url;
-    private long fileSize;
-    private boolean resumable;
-    private String type;
-    private int chunks;
-    private double percent;
-    private long downloadLength;
-    private String saveAddress;
-    private boolean priority;
+    public int id;
+    public String name;
+    public int state;
+    public String url;
+    public long fileSize;
+    public boolean resumable;
+    public String type;
+    public int chunks;
+    public double percent;
+    public long downloadLength;
+    public String saveAddress;
+    public boolean priority;
 
     public long setDownloadLength(long downloadedLength){
         return downloadLength += downloadedLength;
