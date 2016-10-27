@@ -96,7 +96,7 @@ int DownloadManagerPro.addTask(String saveName, String url, boolean overwrite, b
 
 Example:
 ```java
-int taskToekn = dm.addTask("save_name", "http://www.site.com/video/ss.mp4", false, false);
+int taskToken = dm.addTask("save_name", "http://www.site.com/video/ss.mp4", false, false);
 ```
 
 ----
