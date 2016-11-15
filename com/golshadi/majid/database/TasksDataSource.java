@@ -21,7 +21,7 @@ public class TasksDataSource {
 
     private SQLiteDatabase database;
 
-    public void openDatabase(DatabaseHelper dbHelper){
+    public void openDatabase(DatabaseHelper dbHelper) {
         database = dbHelper.getWritableDatabase();
     }
 
@@ -42,10 +42,10 @@ public class TasksDataSource {
         return false;
     }
 
-    public List<Task> getTasksInState(int state){
+    public List<Task> getTasksInState(int state) {
         List<Task> tasks = new ArrayList<Task>();
-
         String query;
+
         if (state < 6)
         	query = "SELECT * FROM "+TABLES.TASKS+" WHERE "+TASKS.COLUMN_STATE+"="+ SqlString.Int(state);
         else
@@ -56,20 +56,21 @@ public class TasksDataSource {
         if (cr != null){
             cr.moveToFirst();
 
-            while ( ! cr.isAfterLast()){
+            while (!cr.isAfterLast()) {
                 Task task = new Task();
                 task.cursorToTask(cr);
                 tasks.add(task);
+
                 cr.moveToNext();
             }
-        }
 
-        cr.close();
+            cr.close();
+        }
 
         return tasks;
     }
 
-    public List<Task> getUnnotifiedCompleted(){
+    public List<Task> getUnnotifiedCompleted() {
         List<Task> completedTasks = new ArrayList<Task>();
 
         // SQLite does not have a separate Boolean storage class. Instead, Boolean values are stored as integers 0 (false) and 1 (true).
@@ -79,20 +80,21 @@ public class TasksDataSource {
         if (cr != null){
             cr.moveToFirst();
 
-            while ( ! cr.isAfterLast()){
+            while (!cr.isAfterLast()){
                 Task task = new Task();
                 task.cursorToTask(cr);
                 completedTasks.add(task);
+
                 cr.moveToNext();
             }
-        }
 
-        cr.close();
+            cr.close();
+        }
 
         return completedTasks;
     }
 
-    public List<Task> getUnCompletedTasks(int sortType){
+    public List<Task> getUnCompletedTasks(int sortType) {
         List<Task> unCompleted = new ArrayList<Task>();
         String query = "SELECT * FROM " + TABLES.TASKS
                 + " WHERE " + TASKS.COLUMN_STATE + "!=" + SqlString.Int(TaskStates.END);
@@ -127,39 +129,43 @@ public class TasksDataSource {
                 Task task = new Task();
                 task.cursorToTask(cr);
                 unCompleted.add(task);
+
                 cr.moveToNext();
             }
+
+            cr.close();
         }
+
         return unCompleted;
     }
 
     public Task getTaskInfo(int id) {
         String query = "SELECT * FROM " + TABLES.TASKS + " WHERE " + TASKS.COLUMN_ID + "=" +SqlString.Int(id);
         Cursor cr = database.rawQuery(query, null);
-        Log.d("--------", "raw query");
+
         Task task = new Task();
-        if (cr.moveToFirst()) {
+        if (cr != null && cr.moveToFirst()) {
             task.cursorToTask(cr);
+            cr.close();
         }
-        cr.close();
-        Log.d("--------", "cr close");
+
         return task;
     }
 
-    public Task getTaskInfoWithName(String name){
+    public Task getTaskInfoWithName(String name) {
         String query = "SELECT * FROM "+TABLES.TASKS+" WHERE "+TASKS.COLUMN_NAME+"="+SqlString.String(name);
         Cursor cr = database.rawQuery(query, null);
 
         Task task = new Task();
         if (cr != null && cr.moveToFirst()) {
             task.cursorToTask(cr);
+            cr.close();
         }
-        cr.close();
 
         return task;
     }
 
-    public boolean delete(int taskID){
+    public boolean delete(int taskID) {
         int affectedRow = database
                 .delete(TABLES.TASKS, TASKS.COLUMN_ID + "=" + SqlString.Int(taskID), null);
 
@@ -170,19 +176,20 @@ public class TasksDataSource {
     }
 
 
-    public boolean containsTask(String name){
+    public boolean containsTask(String name) {
         boolean result = false;
         String  query = "SELECT * FROM "+ TABLES.TASKS +" WHERE "+ TASKS.COLUMN_NAME+"="+SqlString.String(name);
         Cursor cr = database.rawQuery(query, null);
 
-        if (cr.getCount() != 0)
+        if (cr != null && cr.getCount() != 0) {
             result = true;
+            cr.close();
+        }
 
-        cr.close();
         return result;
     }
 
-    public boolean checkUnNotifiedTasks(){
+    public boolean checkUnNotifiedTasks() {
         ContentValues contentValues = new ContentValues();
         contentValues.put(TASKS.COLUMN_NOTIFY, 1);
         int affectedRows = database.update(TABLES.TASKS, contentValues, TASKS.COLUMN_NOTIFY+"="+SqlString.Int(0), null);
@@ -190,7 +197,7 @@ public class TasksDataSource {
         return affectedRows>0;
     }
 
-    public void close(){
+    public void close() {
         database.close();
     }
 }
