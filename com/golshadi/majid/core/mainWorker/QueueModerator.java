@@ -38,11 +38,11 @@ public class QueueModerator
         this.moderator.setQueueObserver(this);
         this.listener = downloadManagerListener;
 	    
+        this.downloadTaskPerTime = downloadPerTime;
         if (tasks.size() < downloadPerTime) {
             this.downloadTaskPerTime = tasks.size();
-        } else {
-            this.downloadTaskPerTime = downloadPerTime;
         }
+	    
         this.uncompletedTasks = tasks;
         
         downloaderList =new HashMap<>(downloadTaskPerTime);
