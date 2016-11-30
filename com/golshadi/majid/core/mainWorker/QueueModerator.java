@@ -39,9 +39,9 @@ public class QueueModerator
         this.listener = downloadManagerListener;
 	    
         if (tasks.size() < downloadPerTime) {
-            downloadTaskPerTime = tasks.size();
+            this.downloadTaskPerTime = tasks.size();
         } else {
-            downloadTaskPerTime = downloadPerTime;
+            this.downloadTaskPerTime = downloadPerTime;
         }
         this.uncompletedTasks = tasks;
         
