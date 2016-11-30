@@ -152,6 +152,31 @@ public class TasksDataSource {
         return task;
     }
 
+    public List<Task> allUnCompleteds() {
+        List<Task> unCompleted = new ArrayList<>();
+
+        String query = "SELECT * FROM " + TABLES.TASKS
+                + " WHERE " + TASKS.COLUMN_STATE + "!=" + SqlString.Int(TaskStates.END);
+
+        Cursor cr = database.rawQuery(query, null);
+
+        if (cr != null) {
+            cr.moveToFirst();
+
+            while (!cr.isAfterLast()) {
+                Task task = new Task();
+                task.cursorToTask(cr);
+                unCompleted.add(task);
+
+                cr.moveToNext();
+            }
+
+            cr.close();
+        }
+
+        return unCompleted;
+    }
+
     public Task getTaskInfoWithName(String name) {
         String query = "SELECT * FROM "+TABLES.TASKS+" WHERE "+TASKS.COLUMN_NAME+"="+SqlString.String(name);
         Cursor cr = database.rawQuery(query, null);
