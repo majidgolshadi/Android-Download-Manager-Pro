@@ -149,6 +149,10 @@ void DownloadManagerPro.StartQueueDownload(int downloadTaskPerTime, int sortType
 
 Example:
 ``` java
+int taskTokenOne   = dm.addTask("save_name", "http://www.site.com/video/ss.mp4",   false, false);
+int taskTokenTwo   = dm.addTask("save_name", "http://www.site.com/video/ss_1.mp4", false, false);
+int taskTokenThree = dm.addTask("save_name", "http://www.site.com/video/ss_2.mp4", false, false);
+
 try {
         dm.startQueueDownload(3, QueueSort.oldestFirst);
 
