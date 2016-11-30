@@ -51,26 +51,29 @@ public class QueueModerator
 
     public void startQueue() {
 
-    	if (uncompletedTasks != null) {
-	
-    		int location = 0;
-    		while (uncompletedTasks.size() > 0 && 
-    				!pauseFlag &&
-    				downloadTaskPerTime >= downloaderList.size()) {
-    			Task task = uncompletedTasks.get(location);
-    			Thread downloader =
-	                    new AsyncStartDownload(tasksDataSource, chunksDataSource, moderator, listener, task);
-	            
-	            downloaderList.put(task.id, downloader);
-	            uncompletedTasks.remove(location);
-	            
-	            downloader.start();
-	            
-	            
-				location++;
-			}
-    			        
-    	}
+        if (uncompletedTasks != null) {
+
+            int location = 0;
+            while (uncompletedTasks.size() > 0 &&
+                    !pauseFlag &&
+                    downloadTaskPerTime >= downloaderList.size()) {
+                try {
+                    Task task = uncompletedTasks.get(location);
+                    Thread downloader =
+                            new AsyncStartDownload(tasksDataSource, chunksDataSource, moderator, listener, task);
+
+                    downloaderList.put(task.id, downloader);
+                    uncompletedTasks.remove(location);
+
+                    downloader.start();
+
+                    location++;
+                } catch (IndexOutOfBoundsException e) {
+                    e.printStackTrace();
+                    Log.e("QueueModerator", e.getMessage());
+                }
+            }
+        }
     }
 
     public void wakeUp(int taskID){
