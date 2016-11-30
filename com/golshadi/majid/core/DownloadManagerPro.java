@@ -352,6 +352,24 @@ public class DownloadManagerPro {
         return false;
     }
 
+    /**
+     * delete all uncompleted downloads tasks from db and files
+     */    
+    public void deleteAllUnCompleteds() {
+        List<Task> task           = tasksDataSource.allUnCompleteds();
+        if (task != null) {
+            for (Task tsk : task) {
+
+                List<Chunk> taskChunks =
+                        chunksDataSource.chunksRelatedTask(tsk.id);
+                for (Chunk chunk : taskChunks) {
+                    FileUtils.delete(tsk.save_address, String.valueOf(chunk.id));
+                    chunksDataSource.delete(chunk.id);
+                }
+                delete(tsk.id, true);
+            }
+        }
+    }
 
     /**
      * close db connection
