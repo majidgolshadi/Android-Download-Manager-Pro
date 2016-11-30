@@ -37,11 +37,15 @@ public class QueueModerator
         this.moderator = localModerator;
         this.moderator.setQueueObserver(this);
         this.listener = downloadManagerListener;
-        this.downloadTaskPerTime = downloadPerTime;
+	    
+        if (tasks.size() < downloadPerTime) {
+            downloadTaskPerTime = tasks.size();
+        } else {
+            downloadTaskPerTime = downloadPerTime;
+        }
         this.uncompletedTasks = tasks;
         
-        downloaderList =
-                new HashMap<Integer, Thread>(downloadTaskPerTime);
+        downloaderList =new HashMap<>(downloadTaskPerTime);
     }
 
 
