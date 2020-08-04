@@ -110,7 +110,7 @@ void DownloadManagerPro.startDownload(int token) throws IOException
 Example:
 ```java
 try {
-        dm.startDownload(taskToekn);
+        dm.startDownload(taskToken);
 
     } catch (IOException e) {
         e.printStackTrace();
