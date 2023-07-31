@@ -129,6 +129,7 @@ public class AsyncStartDownload extends Thread{
         if (urlConnection != null) {
         	task.size = urlConnection.getContentLength();
             task.extension = MimeTypeMap.getFileExtensionFromUrl(task.url);
+        	urlConnection.disconnect();
 
 		}else {
 //			MyExtension.AS3_CONTEXT.dispatchStatusEventAsync(
